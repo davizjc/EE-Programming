@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+ void find_third_largest(const int* a, const int* b, const int* c, const int* d, int* ptr_result){
+    int first = *a;
+    int second= *b;
+    int third= *c;
+    int fourth= *d;
+    int x;
+
+   if(first>second){
+     x=first;
+     first=second;
+     second=x;
+   }
+   else {
+     x = second;
+   }
+
+   if (x > third){
+     second=third;
+     third= x;
+   }
+   else {
+     x = third;
+   }
+   if (x>fourth){
+     third= fourth;
+     fourth=x;
+   }
+
+    *ptr_result=second;
+}
+
+
+int main(){
+
+   int a, b, c, d, third_largest;
+   scanf("%d %d %d %d", &a, &b, &c, &d);
+   find_third_largest(&a, &b, &c, &d, &third_largest);
+   printf("The 3rd largest element is %d\n", third_largest);
+
+   return 0;
+}
+
