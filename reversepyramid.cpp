@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+
+int main(){
+  int n,i,j,p;
+  cin >> n >> p;
+
+  if (p == 1) {
+    for ( i = n ; i >= 1; i --)
+    {
+      for ( j=1; j <= i; j++)
+    {
+       cout << i;
+    }  
+      cout << "\n";
+    }  
+  }
+  if (p==2) {
+     for ( i = n ; i >= 1; i --)
+  {
+      for ( j=i; j >= 1; j--)
+    {
+       cout << j;
+    }  
+      cout << "\n";
+  } 
+  }
+  else {
+    cout << "Unrecognized pattern!";
+  }
+  
+ 
+}
