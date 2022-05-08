@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+void swap(char *a, char *b)
+{
+  char t = *a;
+  *a = *b; 
+  *b = t;
+}
+void reverse(char *str, int k)
+{
+    int x= strlen(str)-k-1;
+    if (k>=x) return;
+    swap(str +k, str + x);
+    reverse ( str,k+1);
+}
+
+int main(){
+    char str[100];
+
+    fgets(str, 100, stdin);
+    strtok(str, "\n");
+ 
+    reverse(str, 0);
+    cout << str;
+ 
+    return 0;
+}
+
