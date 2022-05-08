@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+void swap(int* x, int* y) {
+  int t = *x; 
+  *x=*y;
+  *y=t;
+return;
+}
+
+
+
+
+void bubble_sort(int arr[], int len) {
+   for(int i=0;i<len;i++)
+     for(int j=0;j<len-1;j++){
+       if( arr[j] > arr[j+1]) 
+         swap(arr[j],arr[j+1]);
+     }
+  return;
+}
+
+int main(void){
+    int arr[50], length;
+
+    cin >> length;
+
+    for (int i = 0; i < length; i++)
+        cin >> arr[i];
+
+    bubble_sort(arr, length);
+
+    for(int i=0;i<length;i++){
+        cout << arr[i] << " ";
+    }
+
+    return 0;
+}
+
+
+
