@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+using namespace std;
+#include <iostream>
+
+int find(const char *maze, int i, int j, char *result_maze, const int m, const int n){
+  // maze+i*n+j
+  if(i < 0 || i >= m || j < 0 || j >= n)return 0;
+  
+  if(i == m-1 && j == 0)return 1;
+  
+  if(*(maze+i*n+j) == '0' && *(result_maze+i*n+j) != '3'){
+      *(result_maze+i*n+j) = '3';
+      // printf("i = %d j = %d\n", i, j);
+      if(find(maze, i+1, j, result_maze, m, n)){
+        *(result_maze+i*n+j) = '2';
+        return 1;
+      }
+      if(find(maze, i-1, j, result_maze, m, n)){
+        *(result_maze+i*n+j) = '2';
+        return 1;
+      }
+      if(find(maze, i, j+1, result_maze, m, n)){
+        *(result_maze+i*n+j) = '2';
+        return 1;
+      }
+      if(find(maze, i, j-1, result_maze, m, n)){
+        *(result_maze+i*n+j) = '2';
+        return 1;
+      }
+      *(result_maze+i*n+j) = '0';
+  }
+  return 0;
+}
+void find_path(const char *maze, const int m, const int n, char *result_maze){
+    if(find(maze, 0, n-1, result_maze, m, n)){
+      *(result_maze+n*(m-1)) = '2';
+    }else{
+       *result_maze = 'X';
+    }
+}
+
+int main(void){
+  int m, n;
+
+  cin >> m >> n; // Input maze size
+
+  char *maze = (char*)malloc(sizeof(char)*m*n);
+  char *result_maze = (char*)malloc(sizeof(char)*m*n);
+
+  /*------- Initialize the two array ------*/
+  for(int i=0; i<m; i++)
+    for(int j=0; j<n; j++){
+      *(maze+i*n+j) = '0';
+      *(result_maze+i*n+j) = '0';
+    }
+  /*---------------------------------------*/
+
+
+  /*--------- Input the maze array --------*/
+  for(int i=0; i<m; i++)
+    for(int j=0; j<n; j++)
+      cin >> *(maze+i*n+j);
+  /* --------------------------------------*/
+
+
+  /*-------- Find out the maze path -------*/
+  find_path(maze, m, n, result_maze);
+  /*---------------------------------------*/
+
+  cout << "\n";
+  
+  /*----------- output result -------------*/
+  if('X'==*result_maze)
+    cout << "No way\n";
+  else{
+    for(int i=0; i<m; i++){
+      for(int j=0; j<n; j++)
+          cout << *(result_maze+i*n+j);
+      cout << " \n";
+    }
+  }
+  /*---------------------------------------*/
+
+  return 0;
+}
+
+
