@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int binarySearch(int *sortedarr, int start, int end, int key) {
+  if (end >= start) {
+        int mid = start + (end - start) / 2;
+        if (sortedarr[mid] == key)
+            return mid;
+        if (sortedarr[mid] > key){
+          return binarySearch(sortedarr, start, mid - 1, key);
+        }
+        else {
+           return binarySearch(sortedarr, mid + 1, end, key);
+        }
+    }
+    return -1;
+};
+
+
+int main(){
+  int length, key, pos;
+
+  cin >> length; // Input the length of the sorted array
+
+  int *sortedarr = (int*)malloc(sizeof(int)*length);
+
+  /*----- Input the sorted array -----*/
+  for(int i=0; i<length; i++)
+    cin >> sortedarr[i];
+  /*----------------------------------*/
+
+  cin >> key; // Input the key
+  
+  pos = binarySearch(sortedarr, 0, length-1, key);
+  if(pos!=-1)
+    cout << "Found at location " << pos;
+  else
+    cout << "Not found\n";
+  
+  free(sortedarr);
+  return 0;
+}
+
