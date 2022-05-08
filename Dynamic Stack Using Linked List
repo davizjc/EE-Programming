@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+
+struct stacknode {
+   int data;
+   struct stacknode *next;
+};
+
+void push (struct stacknode **ptr2head, int elem){
+ struct stacknode *new_element = (struct stacknode*)malloc(sizeof(struct stacknode));
+  new_element->next = *ptr2head;
+    new_element->data = elem;
+    *ptr2head = new_element;
+}
+
+int pop(struct stacknode **ptr2head){
+  struct stacknode *new_element = *ptr2head;
+    if (new_element == NULL){
+        cout << "stack is empty!\n";
+        return 0;
+    }
+    int elem = new_element->data;
+    *ptr2head = new_element->next;
+    free(new_element);
+    return elem;
+};
+void show(struct stacknode *head){
+  while (head != NULL){
+        cout << head->data << " ";
+        head = head->next;
+    }
+    cout <<"\n";
+
+    if (head!=NULL){
+        cout <<"empty stack\n";
+    }
+};
+
+int main(){
+   struct stacknode *stacktop = NULL;
+   for(int i = 0; i<10; i++)
+      push(&stacktop,i);
+
+   show(stacktop);
+
+   printf("%d popped\n", pop(&stacktop));
+
+   for(int i = 0; i<10; i++)
+      pop(&stacktop);
+
+   return 0;
+}
+
+
