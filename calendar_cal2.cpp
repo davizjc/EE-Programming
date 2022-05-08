@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+
+int main(){
+  int i,days;
+  int day=0;
+  cin >> i >> days;  //month and days
+  int month[] = {31,28,31,30,31,30,31,31,30,31,30};
+
+  if (i >= 2){
+    for(int x = 0; x < i-1; x++)
+      {
+        day += month[x];
+      }
+    day+=days;
+  }
+  else {
+    day = days;
+  }
+   cout << day;
+}
