@@ -1,0 +1,92 @@
+#include <iostream>
+using namespace std;
+
+
+
+int main(void) {
+
+int n;
+int grid[99][99]; 
+int row[99],col[99];
+int i,j;
+
+  cin >> n; 
+  
+  for(i=1; i<=n; i++){
+    for(j=1; j<=n; j++){
+      cin >> grid[i][j]; 
+      
+      //saves x&y coordinates of the scanned number and make the number itself to be the pointer to them
+      row[grid[i][j]] = j;
+      col[grid[i][j]] = i; 
+    }
+  }
+
+  int input; //saves guessed number from user input
+  int wini[99]; 
+  int winj[99]; 
+  int dag; 
+  int dag1; 
+  int isBingo[99][99]; //saves a final grid with each bingo's position
+  
+  while (cin >> input){
+    if (input == -1){ //stops scanning
+      cout << "lost\n";
+      break; 
+    }
+
+    if (row[input] > 0 && col[input] > 0){ 
+      wini[col[input]]++; 
+      winj[row[input]]++; 
+      if (row[input] == col[input]) {
+        dag++; 
+      }
+      if (row[input] + col[input] == n+1) {
+        dag1++;
+      }
+         
+      if (wini[col[input]] == n || winj[row[input]] == n || dag == n || dag1 == n ){ 
+        cout << "won\n";
+        break; 
+      } 
+    }
+  }
+
+
+  for(i=1; i<=n; i++){
+    for(j=1; j<=n; j++){
+      if ( wini[i]==n || winj[j]==n) {
+        isBingo[i][j] = 1; 
+      }
+    }
+    if (dag == n) 
+      isBingo[i][i] = 1; 
+    if (dag1 == n) 
+      isBingo[i][n-i+1] = 1;
+  } 
+
+
+for(i=1; i<=n; i++){
+    for(j = 1; j<=n; j++){
+      if (isBingo[i][j]){ 
+        if (grid[i][j]<10) 
+          cout << "**"; 
+        else  
+          cout << "*"; 
+        cout << grid[i][j];
+      }
+      else{ 
+        if (grid[i][j] < 10){ 
+            cout << "  ";
+        } else 
+            cout << " "; 
+        cout << grid[i][j];
+      }
+      if (j < n) 
+        cout << " "; 
+    }
+    cout << "\n";
+  }
+
+  return 0;
+}
