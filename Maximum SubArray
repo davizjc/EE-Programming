@@ -1,0 +1,36 @@
+#include <iostream>
+
+
+
+using namespace std;
+ 
+int maxSubArraySum(int a[], int size)
+{
+   int max_so_far = a[0];
+   int curr_max = a[0];
+ 
+   for (int i = 1; i < size; i++)
+   {
+        curr_max = max(a[i], curr_max+a[i]);
+        max_so_far = max(max_so_far, curr_max);
+   }
+   return max_so_far;
+}
+// look for all positive number in array (curr_max).
+//keep track of maximum sum (max_so_far). 
+//Each time we get a positive-sum compare it with max_so_far and update max_so_far if it is greater than curr_max
+
+/*Driver program to test maxSubArraySum*/
+int main()
+{
+  int n;
+  cin >> n; 
+  int *arr = (int*)malloc(sizeof(int)*n);
+  for(int i=0; i<n; i++)
+    cin >> arr[i];
+
+  int max_sum = maxSubArraySum(arr, n);
+  cout  << max_sum;
+  return 0;
+}
+
